@@ -3,7 +3,7 @@ package com.victor.dto
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ParseStringResponse(
+data class BenfordResponse(
     val followsBenfordsLaw: Boolean,
     val confidenceLevel: Double,
     val expectedDistribution: DoubleArray,
@@ -13,7 +13,7 @@ data class ParseStringResponse(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as ParseStringResponse
+        other as BenfordResponse
 
         if (followsBenfordsLaw != other.followsBenfordsLaw) return false
         if (confidenceLevel != other.confidenceLevel) return false

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class AccountStringParserTest {
+class AccountBalanceParserTest {
 
     // Bedford's law: in many real-life sets of numerical data, the leading digit is likely to be small.
 

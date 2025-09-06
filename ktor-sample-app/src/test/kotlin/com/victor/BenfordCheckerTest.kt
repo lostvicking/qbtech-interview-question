@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.lang.Math.pow
 
-class BenfordLawCheckerTest {
+class BenfordCheckerTest {
 
     private var sut: BenfordChecker = BenfordChecker();
 
@@ -14,7 +14,7 @@ class BenfordLawCheckerTest {
         val benfordData = generateBenfordDoubles(1000)
         val confidenceValue = 0.05;
         val result = sut.chiSquaredTest(benfordData, confidenceValue)
-        assertTrue(result, "Benford data should follow Benford's Law")
+        assertTrue(result.followsBenfordsLaw, "Benford data should follow Benford's Law")
     }
 
     @Test
@@ -22,7 +22,7 @@ class BenfordLawCheckerTest {
         val nonBenfordData = generateNonBenfordDoubles(1000)
         val confidenceValue = 0.05;
         val result = sut.chiSquaredTest(nonBenfordData, confidenceValue)
-        assertFalse(result, "Benford data should follow Benford's Law")
+        assertFalse(result.followsBenfordsLaw, "Benford data should follow Benford's Law")
     }
 
     private fun generateNonBenfordDoubles(size: Int): List<Double> {

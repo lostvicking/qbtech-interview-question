@@ -1,6 +1,6 @@
 package com.victor.math
 
-import com.victor.dto.ParseStringResponse
+import com.victor.dto.BenfordResponse
 import org.apache.commons.math3.stat.inference.ChiSquareTest
 import kotlin.math.log10
 
@@ -14,7 +14,7 @@ class BenfordChecker {
      * @param confidenceLevel The confidence level for the test (e.g., 0.05 for 95% confidence)
      * @return Boolean indicating whether the data follows Benford's Law at the given confidence level
      */
-    fun chiSquaredTest(accountBalances: List<Double>, confidenceLevel: Double): ParseStringResponse {
+    fun chiSquaredTest(accountBalances: List<Double>, confidenceLevel: Double): BenfordResponse {
         // Extract first digits from account balances
         val firstDigits = getFirstDigits(accountBalances) // Only digits 1-9
 
@@ -45,7 +45,7 @@ class BenfordChecker {
         //3. We conclude the data does NOT follow Benford's Law
 
         // we invert the value because if the null hypothesis is rejected, the data does NOT follow Benford's Law
-        val response = ParseStringResponse(
+        val response = BenfordResponse(
             followsBenfordsLaw = !nullHypothesisRejected,
             confidenceLevel = confidenceLevel,
             expectedDistribution = expectedDistributionOfDigits,

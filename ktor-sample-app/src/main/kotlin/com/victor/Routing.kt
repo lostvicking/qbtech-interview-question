@@ -1,7 +1,6 @@
 package com.victor
 
 import com.victor.dto.BenfordRequest
-import com.victor.dto.ParseStringResponse
 import com.victor.math.BenfordChecker
 import com.victor.parser.AccountBalanceParser
 import io.ktor.server.application.*
@@ -17,14 +16,13 @@ fun Application.configureRouting() {
         post("/parse-string") {
             try {
                 val request = call.receive<BenfordRequest>()
-                log.info("incoming request: $request")
 
                 val parser = AccountBalanceParser()
-                val parsedNumbers = parser.parseToDoubles(request.accountBalances)
+                val accountBalances = parser.parseToDoubles(request.accountBalances)
 
-                val checker = BenfordChecker()
+                val benford = BenfordChecker()
                 val confidenceLevel = request.confidenceLevel.toDouble()
-                val response = checker.chiSquaredTest(parsedNumbers, confidenceLevel)
+                val response = benford.chiSquaredTest(accountBalances, confidenceLevel)
 
                 call.respond(response)
             } catch (e: Exception) {
