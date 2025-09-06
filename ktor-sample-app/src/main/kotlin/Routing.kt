@@ -1,7 +1,7 @@
 package com.victor
 
-import com.victor.com.victor.BenfordLawChecker
-import com.victor.com.victor.MyStringParser
+import com.victor.BenfordLawChecker
+import com.victor.MyStringParser
 import io.ktor.server.application.*
 import io.ktor.server.request.receiveText
 import io.ktor.server.response.*
@@ -20,7 +20,7 @@ fun Application.configureRouting() {
             val parsedString = parser.parse(inputString);
 
             val checker = BenfordLawChecker();
-            checker.chiSquaredTest(parsedString, 0.05);
+//            checker.chiSquaredTest(parsedString, 0.05);
 
             call.respond(inputString)
         }
