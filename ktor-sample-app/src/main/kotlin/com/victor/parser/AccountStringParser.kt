@@ -2,10 +2,15 @@ package com.victor.parser
 
 class AccountStringParser() {
     fun parseToDoubles(inputString: String): List<Double> {
-        // Parse strings like "account1: 123.45, account2: 67.89, account3: 0.12"
-        val regex = Regex("""account\d+:\s*(\d+\.?\d*)""")
+        // Parse strings like "account1: 20,68, account2: 2,81, account3: 14971,28"
+        // Handle both comma and dot as decimal separators
+        val regex = Regex("""account\d+:\s*(\d+(?:[,.]\d+)?)""")
         return regex.findAll(inputString)
-            .map { it.groupValues[1].toDouble() }
+            .map { matchResult ->
+                val numberString = matchResult.groupValues[1]
+                // Replace comma with dot for proper Double parsing
+                numberString.replace(",", ".").toDouble()
+            }
             .toList()
     }
 }
