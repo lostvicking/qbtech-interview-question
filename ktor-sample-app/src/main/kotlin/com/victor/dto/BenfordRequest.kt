@@ -3,7 +3,7 @@ package com.victor.dto
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ParseStringRequest(
+data class BenfordRequest(
     val confidenceLevel: String,
-    val accountData: String
+    val accountBalances: String
 )

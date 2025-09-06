@@ -1,6 +1,6 @@
 package com.victor.parser
 
-class AccountStringParser() {
+class AccountBalanceParser() {
     fun parseToDoubles(inputString: String): List<Double> {
         // Parse strings like "account1: 20,68, account2: 2,81, account3: 14971,28"
         // Handle both comma and dot as decimal separators

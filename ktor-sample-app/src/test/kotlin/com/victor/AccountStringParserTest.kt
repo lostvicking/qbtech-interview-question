@@ -1,6 +1,6 @@
 package com.victor
 
-import com.victor.parser.AccountStringParser
+import com.victor.parser.AccountBalanceParser
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -35,11 +35,11 @@ class AccountStringParserTest {
 
     private var accountGen: AccountStringGenerator  = AccountStringGenerator();
 
-    private lateinit var sut: AccountStringParser;
+    private lateinit var sut: AccountBalanceParser;
 
     @BeforeEach
     fun setup() {
-        sut = AccountStringParser();
+        sut = AccountBalanceParser();
     }
 
     @Test
