@@ -1,12 +1,12 @@
-package com.victor
+package com.victor.math
 
 import org.apache.commons.math3.stat.inference.ChiSquareTest
-import org.apache.commons.math3.distribution.ChiSquaredDistribution
+import kotlin.math.log10
 
-class BenfordLawChecker {
-    
+class BenfordChecker {
+
     private val chiSquareTest = ChiSquareTest()
-    
+
     /**
      * Performs a chi-squared test to determine if the given account balances follow Benford's Law
      * @param accountBalances List of account balance values to test
@@ -22,28 +22,34 @@ class BenfordLawChecker {
                 firstDigit
             }
             .filter { it in 1..9 } // Only digits 1-9
-        
+
         if (firstDigits.isEmpty()) {
             throw IllegalArgumentException("No valid account balances found")
         }
-        
+
         // Count occurrences of each first digit
         val observedCounts = LongArray(9) // Index 0 = digit 1, index 1 = digit 2, etc.
         firstDigits.forEach { digit ->
             observedCounts[digit - 1]++
         }
-        
+
         // Calculate expected counts based on Benford's Law
         val totalCount = firstDigits.size.toDouble()
         val expectedCounts = DoubleArray(9) { digit ->
             val d = digit + 1 // Convert index to actual digit (1-9)
-            totalCount * kotlin.math.log10(1.0 + 1.0 / d)
+            totalCount * log10(1.0 + 1.0 / d)
         }
-        
+
         // Perform chi-squared test
-        val nullHypothesisRejectedForWithConfidence = chiSquareTest.chiSquareTest(expectedCounts, observedCounts, confidenceLevel)
-        
-        // Return true if p-value is greater than significance level (data follows Benford's Law)
-        return nullHypothesisRejectedForWithConfidence
+        val nullHypothesisRejected = chiSquareTest.chiSquareTest(expectedCounts, observedCounts, confidenceLevel)
+
+        //When the null hypothesis is rejected, it means:
+        //
+        //1. The statistical test found significant evidence that the observed distribution of first digits differs from what Benford's Law predicts
+        //2. The p-value was less than the significance level (e.g., p < 0.05), indicating the difference is unlikely to be due to random chance
+        //3. We conclude the data does NOT follow Benford's Law
+
+        // we invert the value because if the null hypothesis is rejected, the data does NOT follow Benford's Law
+        return !nullHypothesisRejected
     }
 }

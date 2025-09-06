@@ -15,7 +15,8 @@ class AccountStringGenerator {
                 val accountBalance = generateBenfordBalance()
                 entries.add("$accountName: $accountBalance")
             } else {
-                val accountBalance = generateRandomBalance()
+//                val accountBalance = generateRandomBalance()
+                val accountBalance = generateUnbenfordBalance()
                 entries.add("$accountName: $accountBalance")
             }
         }
@@ -25,7 +26,16 @@ class AccountStringGenerator {
 
     private fun generateBenfordBalance(): String {
         // Generate a Benford-compliant balance
-        val leadingDigit = Random.nextInt(1, 10)
+        val leadingDigit = Random.nextInt(1, 3)
+        val magnitude = Random.nextInt(0, 5) // to create variability in size
+        val restOfNumber = Random.nextDouble(0.0, 1.0) * Math.pow(10.0, magnitude.toDouble())
+        val accountBalance = String.format("%.2f", leadingDigit * Math.pow(10.0, magnitude.toDouble()) + restOfNumber)
+        return accountBalance
+    }
+
+    private fun generateUnbenfordBalance(): String {
+        // Generate a Benford-compliant balance
+        val leadingDigit = Random.nextInt(7, 9)
         val magnitude = Random.nextInt(0, 5) // to create variability in size
         val restOfNumber = Random.nextDouble(0.0, 1.0) * Math.pow(10.0, magnitude.toDouble())
         val accountBalance = String.format("%.2f", leadingDigit * Math.pow(10.0, magnitude.toDouble()) + restOfNumber)
@@ -41,6 +51,6 @@ class AccountStringGenerator {
 
 fun main() {
     val generator = AccountStringGenerator()
-    val result = generator.generateAccountBalanceString(false, 100)
+    val result = generator.generateAccountBalanceString(true, 100)
     println(result)
 }

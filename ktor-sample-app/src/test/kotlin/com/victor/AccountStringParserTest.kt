@@ -1,8 +1,11 @@
 package com.victor
 
+import com.victor.parser.AccountStringParser
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class MyStringParserTest {
+class AccountStringParserTest {
 
     // Bedford's law: in many real-life sets of numerical data, the leading digit is likely to be small.
 
@@ -30,13 +33,23 @@ class MyStringParserTest {
     // https://blog.bigml.com/2015/05/15/detecting-numeric-irregularities-with-benfords-law/
 
 
+    private var accountGen: AccountStringGenerator  = AccountStringGenerator();
+
+    private lateinit var sut: AccountStringParser;
+
+    @BeforeEach
+    fun setup() {
+        sut = AccountStringParser();
+    }
+
     @Test
     fun testParse() {
+//        val benfordBalances = accountGen.generateAccountBalanceString(true, 100)
 
+        val actual = sut.parseToDoubles("account1: 123.45");
+        assertTrue(actual.size == 1);
+        assertTrue(actual[0] == 123.45);
 
-        val parser = MyStringParser();
-        val actual = parser.parse("hello")
-//        assert(result == "HELLO")
     }
 
 }
