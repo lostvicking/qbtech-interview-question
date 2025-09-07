@@ -23,14 +23,10 @@ class BenfordChecker {
         }
 
         // Count occurrences of each first digit
-        val actualDistributionOfDigits = countActualDistribution(firstDigits) // Index 0 = digit 1, index 1 = digit 2, etc.
+        val actualDistributionOfDigits = calculateActualDistribution(firstDigits) // Index 0 = digit 1, index 1 = digit 2, etc.
 
         // Calculate expected counts based on Benford's Law
-        val totalCount = firstDigits.size.toDouble()
-        val expectedDistributionOfDigits = DoubleArray(9) { digit ->
-            val d = digit + 1 // Convert index to actual digit (1-9)
-            totalCount * log10(1.0 + 1.0 / d)
-        }
+        val expectedDistributionOfDigits = calculateExpectedDistribution(firstDigits)
 
         // Perform chi-squared test
         val nullHypothesisRejected = chiSquareTest.chiSquareTest(expectedDistributionOfDigits, actualDistributionOfDigits, confidenceLevel)
@@ -52,7 +48,16 @@ class BenfordChecker {
         return response
     }
 
-    private fun countActualDistribution(firstDigits: List<Int>): LongArray {
+    private fun calculateExpectedDistribution(firstDigits: List<Int>): DoubleArray {
+        val totalCount = firstDigits.size.toDouble()
+        val expectedDistributionOfDigits = DoubleArray(9) { digit ->
+            val d = digit + 1 // Convert index to actual digit (1-9)
+            totalCount * log10(1.0 + 1.0 / d)
+        }
+        return expectedDistributionOfDigits
+    }
+
+    private fun calculateActualDistribution(firstDigits: List<Int>): LongArray {
         val actualDistributionOfDigits = LongArray(9) // Index 0 = digit 1, index 1 = digit 2, etc.
         firstDigits.forEach { digit ->
             actualDistributionOfDigits[digit - 1]++

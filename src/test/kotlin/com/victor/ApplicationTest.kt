@@ -11,8 +11,10 @@ import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.isSuccess
 import io.ktor.server.testing.testApplication
-import kotlin.test.Test
-import kotlin.test.assertTrue
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
+import kotlin.test.assertFalse
+
 
 class ApplicationTest {
 
@@ -20,7 +22,7 @@ class ApplicationTest {
     // https://ktor.io/docs/server-testing.html#test-app
 
     @Test
-    fun testRoot() = testApplication {
+    fun testRoot_whenAccountBalancesNotBenford_shouldReturnFalse() = testApplication {
         application {
             module()
         }
@@ -33,16 +35,15 @@ class ApplicationTest {
 
         val response = client.post("/parse-string") {
             contentType(ContentType.Application.Json)
-            setBody(
-                BenfordRequest(
-                    accountBalances = "123, 456, 789, 101, 112, 131, 415, 161, 718, 192",
-                    confidenceLevel = "0.05"
-                )
+            setBody("{" +
+                    "    \"confidenceLevel\": \"0.05\",\n" +
+                    "    \"accountBalances\": \"account1: 90,68, account2: 92,81, account3: 14971,28\"\n" +
+                    "}"
             )
         }
 
         assertTrue(response.status.isSuccess())
         val benfordResponse = response.body<BenfordResponse>()
-        assertTrue { benfordResponse.followsBenfordsLaw }
+        assertFalse { benfordResponse.followsBenfordsLaw }
     }
 }
