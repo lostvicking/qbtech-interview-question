@@ -33,7 +33,7 @@ class ApplicationTest {
             }
         }
 
-        val response = client.post("/benson-test-of-fit") {
+        val response = client.post("/benford-test-of-fit") {
             contentType(ContentType.Application.Json)
             setBody("{" +
                     "    \"confidenceLevel\": \"0.05\",\n" +

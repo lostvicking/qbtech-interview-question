@@ -21,14 +21,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/benson-test-of-fit",
+					"raw": "http://localhost:8080/benford-test-of-fit",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"benson-test-of-fit"
+						"benford-test-of-fit"
 					]
 				}
 			},
@@ -49,14 +49,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/benson-test-of-fit",
+					"raw": "http://localhost:8080/benford-test-of-fit",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"benson-test-of-fit"
+						"benford-test-of-fit"
 					]
 				}
 			},

@@ -11,7 +11,7 @@ import io.ktor.server.routing.*
 
 fun Application.configureRouting() {
     routing {
-        post("/benson-test-of-fit") {
+        post("/benford-test-of-fit") {
             try {
                 val request = call.receive<BenfordRequest>()
 
