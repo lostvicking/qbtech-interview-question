@@ -17,9 +17,9 @@ fun Application.configureRouting() {
 
                 val parser = AccountBalanceParser()
                 val accountBalances = parser.parseToDoubles(request.accountBalances)
+                val confidenceLevel = request.confidenceLevel.toDouble()
 
                 val benford = BenfordChecker()
-                val confidenceLevel = request.confidenceLevel.toDouble()
                 val response = benford.chiSquaredTest(accountBalances, confidenceLevel)
 
                 call.respond(HttpStatusCode.OK, response)
