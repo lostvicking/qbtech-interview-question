@@ -33,7 +33,7 @@ class AccountBalanceParserTest {
     // https://blog.bigml.com/2015/05/15/detecting-numeric-irregularities-with-benfords-law/
 
 
-    private var accountGen: AccountStringGenerator  = AccountStringGenerator();
+    private var accountGen: AccountBalanceGenerator  = AccountBalanceGenerator();
 
     private lateinit var sut: AccountBalanceParser;
 

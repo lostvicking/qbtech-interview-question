@@ -1,1 +1,0 @@
-# qbtech-interview-question

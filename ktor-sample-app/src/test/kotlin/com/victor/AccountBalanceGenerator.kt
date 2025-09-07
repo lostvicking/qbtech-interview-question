@@ -4,7 +4,7 @@ import kotlin.random.Random
 
 // can use this to test the API for receiving string with account balances
 // TODO: move to test package?
-class AccountStringGenerator {
+class AccountBalanceGenerator {
     
     fun generateAccountBalanceString(isBenford: Boolean, numberAccounts: Int): String {
         val entries = mutableListOf<String>()
@@ -50,7 +50,7 @@ class AccountStringGenerator {
 }
 
 fun main() {
-    val generator = AccountStringGenerator()
+    val generator = AccountBalanceGenerator()
     val result = generator.generateAccountBalanceString(true, 100)
     println(result)
 }

@@ -23,10 +23,7 @@ class BenfordChecker {
         }
 
         // Count occurrences of each first digit
-        val actualDistributionOfDigits = LongArray(9) // Index 0 = digit 1, index 1 = digit 2, etc.
-        firstDigits.forEach { digit ->
-            actualDistributionOfDigits[digit - 1]++
-        }
+        val actualDistributionOfDigits = countActualDistribution(firstDigits) // Index 0 = digit 1, index 1 = digit 2, etc.
 
         // Calculate expected counts based on Benford's Law
         val totalCount = firstDigits.size.toDouble()
@@ -53,6 +50,14 @@ class BenfordChecker {
         )
 
         return response
+    }
+
+    private fun countActualDistribution(firstDigits: List<Int>): LongArray {
+        val actualDistributionOfDigits = LongArray(9) // Index 0 = digit 1, index 1 = digit 2, etc.
+        firstDigits.forEach { digit ->
+            actualDistributionOfDigits[digit - 1]++
+        }
+        return actualDistributionOfDigits
     }
 
     private fun getFirstDigits(accountBalances: List<Double>): List<Int> {
