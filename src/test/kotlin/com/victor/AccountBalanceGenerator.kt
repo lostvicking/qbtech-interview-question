@@ -3,7 +3,7 @@ package com.victor
 import kotlin.random.Random
 
 // can use this to test the API for receiving string with account balances
-// TODO: move to test package?
+// TODO: generate accountBalances using this and use for testing the API
 class AccountBalanceGenerator {
     
     fun generateAccountBalanceString(isBenford: Boolean, numberAccounts: Int): String {
