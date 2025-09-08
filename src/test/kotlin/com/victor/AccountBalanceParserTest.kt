@@ -31,9 +31,7 @@ class AccountBalanceParserTest {
     // googling around: you c an use Bedford's law to detect fraud/suspicious data
     // "A post mortem Benford’s law analysis of the accounts for several bankrupt US municipalities revealed inconsistent figures, which could be indicative of the fiscal dishonesty which led to the municipalities’ financial ruin."
     // https://blog.bigml.com/2015/05/15/detecting-numeric-irregularities-with-benfords-law/
-
-
-    private var accountGen: AccountBalanceGenerator  = AccountBalanceGenerator();
+    
 
     private lateinit var sut: AccountBalanceParser;
 
