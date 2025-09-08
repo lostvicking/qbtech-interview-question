@@ -1,16 +1,11 @@
 package com.victor
 
-import com.victor.dto.BenfordRequest
 import com.victor.dto.BenfordResponse
-import io.ktor.client.call.body
-import io.ktor.client.request.post
-import io.ktor.serialization.kotlinx.json.json
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.request.setBody
-import io.ktor.http.ContentType
-import io.ktor.http.contentType
-import io.ktor.http.isSuccess
-import io.ktor.server.testing.testApplication
+import io.ktor.client.call.*
+import io.ktor.client.request.*
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
+import io.ktor.server.testing.*
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import kotlin.test.assertFalse
